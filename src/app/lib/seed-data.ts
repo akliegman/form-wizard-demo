@@ -1,7 +1,7 @@
 import {
-  User,
   OnboardingComponent,
   OnboardingFlow,
+  User,
 } from "@/app/lib/definitions";
 
 const users: User[] = [

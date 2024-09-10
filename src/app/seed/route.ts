@@ -1,9 +1,10 @@
-import bcrypt from "bcrypt";
 import { db } from "@vercel/postgres";
+import bcrypt from "bcrypt";
+
 import {
-  users,
   onboardingComponents,
   onboardingFlows,
+  users,
 } from "@/app/lib/seed-data";
 
 const client = await db.connect();
@@ -40,7 +41,7 @@ async function seedUsers() {
         INSERT INTO users (email, password, about_me, street_address, city, state, zip, birthdate)
         VALUES (${user.email}, ${hashedPassword}, ${about_me}, ${street_address}, ${city}, ${state}, ${zip}, ${birthdate});
       `;
-    })
+    }),
   );
 
   return usersToSeed;
@@ -63,7 +64,7 @@ async function seedOnboardingComponents() {
         INSERT INTO admin_onboarding_components (name, description, type)
         VALUES (${name}, ${description}, ${type});
       `;
-    })
+    }),
   );
 
   return componentsToSeed;
@@ -85,7 +86,7 @@ async function seedOnboardingFlows() {
         INSERT INTO admin_onboarding_flows (step, can_change_step)
         VALUES (${step}, ${can_change_step});
       `;
-    })
+    }),
   );
 
   return flowsToSeed;

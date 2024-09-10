@@ -37,4 +37,4 @@ interface OnboardingFlow {
   can_change_step: boolean;
 }
 
-export type { User, OnboardingComponent, OnboardingFlow };
+export type { Address, User, OnboardingComponent, OnboardingFlow };
