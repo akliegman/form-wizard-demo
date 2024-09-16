@@ -1,0 +1,100 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3.75rem;
+  padding: 3rem 3.75rem;
+  background-color: var(--color-white);
+}
+
+.tabList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 3.75rem;
+}
+
+.tab {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  background-color: var(--color-turquoise-400);
+  cursor: pointer;
+
+  &[data-selected] {
+    background-color: var(--color-turquoise-200);
+    outline: 2px solid var(--color-turquoise-400);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+    background-color: var(--color-gray-1000);
+    color: var(--color-gray-800);
+  }
+}
+
+.tabPanel {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.textField {
+  width: 100%;
+  &.state {
+    max-width: calc(66.666% - 0.75rem);
+  }
+  &.zip {
+    max-width: calc(33.333% - 0.75rem);
+  }
+}
+
+.button {
+  align-self: flex-end;
+  margin-top: 1.5rem;
+}
+
+.errorMessage {
+  background-color: var(--color-pink-900);
+  color: var(--color-pink-200);
+  padding: 1.25rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+  .tabList {
+    margin: 0;
+  }
+
+  .textField {
+    &.state,
+    &.zip {
+      max-width: 100%;
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
+}

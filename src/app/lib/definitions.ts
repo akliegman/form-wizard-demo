@@ -1,40 +1,69 @@
-interface User {
-  user_id: number;
-  email: string;
-  password: string;
-  about_me?: string;
-  street_address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  birthdate?: string;
-}
-
-interface Address {
+export interface Address {
   street_address: string;
   city: string;
   state: string;
   zip: string;
 }
 
-type OnboardingComponentType =
+export interface User extends Address {
+  id: number;
+  user_id: string;
+  email: string;
+  password: string;
+  about_me?: string;
+  birthdate?: string;
+  onboarding_step: OnboardingFlowStep;
+  created_at: string;
+  updated_at: string;
+}
+
+export type OnboardingComponentType =
   | "email"
   | "password"
-  | "long_text"
+  | "textarea"
   | "address"
   | "date";
 
-interface OnboardingComponent {
-  component_id: number;
+export type OnboardingInputType = HTMLInputElement["type"] | "textarea";
+
+export interface OnboardingField {
+  name: keyof User;
+  placeholder: string;
+  label: string;
+  type: OnboardingInputType;
+  required: boolean;
+}
+
+export interface OnboardingComponent {
+  id: number;
+  component_id: string;
   type: OnboardingComponentType;
   name: string;
-  description?: string;
+  fields: OnboardingField[];
+  created_at: string;
+  updated_at: string;
 }
 
-interface OnboardingFlow {
-  component_id: number;
-  step: 1 | 2 | 3;
+export type OnboardingFlowStep = number;
+
+export type OnboardingFlowStepKey = `step_${OnboardingFlowStep}`;
+
+export interface OnboardingFlow {
+  id: number;
+  component_id: string;
+  step: OnboardingFlowStep;
   can_change_step: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
-export type { Address, User, OnboardingComponent, OnboardingFlow };
+export interface OnboardingComponentWithFlow extends OnboardingComponent {
+  step: OnboardingFlowStep;
+  can_change_step: boolean;
+  flow_updated_at: string;
+}
+
+export interface OnboardingComponentGroup {
+  step: number;
+  components: OnboardingComponentWithFlow[];
+}
