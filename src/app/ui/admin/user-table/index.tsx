@@ -58,9 +58,11 @@ export const UserTable = () => {
         </TableHeader>
         <TableBody>
           {users.map((user) => {
-            const birthdate = user.birthdate
-              ? new Date(user.birthdate).toLocaleDateString()
-              : "";
+            const birthdate = user.birthdate ? new Date(user.birthdate) : "";
+            const formattedBirthdate =
+              birthdate instanceof Date
+                ? `${birthdate.getUTCMonth() + 1}/${birthdate.getUTCDate()}/${birthdate.getUTCFullYear()}`
+                : "";
             const createdAt = user.created_at
               ? new Date(user.created_at).toLocaleString()
               : "";
@@ -80,7 +82,7 @@ export const UserTable = () => {
                 <Cell>{user.city}</Cell>
                 <Cell>{user.state}</Cell>
                 <Cell>{user.zip}</Cell>
-                <Cell>{birthdate}</Cell>
+                <Cell>{formattedBirthdate}</Cell>
                 <Cell>{createdAt}</Cell>
                 <Cell>{updatedAt}</Cell>
               </Row>
