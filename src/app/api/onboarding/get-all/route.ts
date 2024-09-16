@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 import { sqlSelectOnboardingComponents } from "@/app/lib/sql/onboarding";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const client = createClient();
   await client.connect();

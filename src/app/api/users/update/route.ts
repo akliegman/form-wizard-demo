@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { User } from "@/app/lib/definitions";
 import { sqlSelectUserByUserId, sqlUpdateUser } from "@/app/lib/sql/users";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   const client = createClient();
   await client.connect();
@@ -32,8 +34,6 @@ export async function POST(request: NextRequest) {
       ? new Date(existingUserData.birthdate).toISOString()
       : null;
 
-  console.log(birthdateDate, "birthdate");
-
   const user = {
     user_id,
     about_me: about_me || existingUserData?.about_me || null,
@@ -44,8 +44,6 @@ export async function POST(request: NextRequest) {
     state: state || existingUserData?.state || null,
     zip: zip || existingUserData?.zip || null,
   };
-
-  console.log("user", user);
 
   const updatedUser = await client.query(sqlUpdateUser(user as User));
 

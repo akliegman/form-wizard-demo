@@ -5,6 +5,8 @@ import { AUTH_TOKEN } from "@/app/lib/constants";
 import { verifyToken } from "@/app/lib/helpers/auth";
 import { sqlSelectUserByUserId } from "@/app/lib/sql/users";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   const client = createClient();
   await client.connect();

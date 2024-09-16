@@ -9,6 +9,8 @@ import {
 } from "@/app/lib/helpers/auth";
 import { sqlCreateUser } from "@/app/lib/sql/users";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   const client = createClient();
   await client.connect();

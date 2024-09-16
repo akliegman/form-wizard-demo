@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Written by Adam Kliegman",
 };
 
+export const fetchCache = "force-no-store";
+
 export default function RootLayout({
   children,
 }: Readonly<{

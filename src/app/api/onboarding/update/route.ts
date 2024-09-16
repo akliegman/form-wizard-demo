@@ -7,6 +7,8 @@ import {
   sqlUpdateOnboardingComponentStep,
 } from "@/app/lib/sql/onboarding";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   const client = createClient();
   await client.connect();
