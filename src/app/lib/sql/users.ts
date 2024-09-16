@@ -61,30 +61,34 @@ export const sqlSelectUserByUserId = (userId: string) => `
   WHERE user_id = '${userId}';
 `;
 
-export const sqlUpdateUser = (user: User) => {
-  const {
-    user_id,
-    about_me,
-    birthdate,
-    city,
-    street_address,
-    state,
-    zip,
-    onboarding_step,
-  } = user;
+export const sqlUpdateUser = (user: Partial<User>) => {
+  const { user_id, ...fields } = user;
 
-  return `
-    UPDATE users
-    SET 
-      about_me = '${about_me}',
-      ${birthdate && `birthdate = '${birthdate}',`}
-      city = '${city}',
-      street_address = '${street_address}',
-      state = '${state}',
-      zip = '${zip}',
-      onboarding_step = ${onboarding_step},
-      updated_at = NOW()
-    WHERE user_id = '${user_id}'
-    RETURNING *;
-  `;
+  const validFields = Object.entries(fields).filter(
+    ([_, value]) => value !== null,
+  );
+
+  if (validFields.length === 0) throw new Error("No fields to update");
+
+  const setClauses = validFields.map(
+    ([key], index) => `${key} = $${index + 1}`,
+  );
+
+  const values = validFields.map(([_, value]) => value);
+
+  if (user_id !== undefined) {
+    values.push(user_id);
+  } else {
+    throw new Error("user_id is undefined");
+  }
+
+  return {
+    text: `
+      UPDATE users
+      SET ${setClauses.join(", ")}, updated_at = NOW()
+      WHERE user_id = $${values.length}
+      RETURNING *;
+    `,
+    values,
+  };
 };

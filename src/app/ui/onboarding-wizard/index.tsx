@@ -73,7 +73,7 @@ export const OnboardingWizard = () => {
         await createUser(body).then((data) => {
           setActionsDisabled(false);
           if (data.error) {
-            setErrorMessage(data.error);
+            setErrorMessage(JSON.stringify(data.error));
             return;
           }
 
@@ -91,7 +91,7 @@ export const OnboardingWizard = () => {
         };
         await updateUser(body).then((data) => {
           if (data.error) {
-            setErrorMessage(data.error);
+            setErrorMessage(JSON.stringify(data.error));
             return;
           }
 

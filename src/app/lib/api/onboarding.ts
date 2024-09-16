@@ -10,7 +10,6 @@ export const getAllOnboardingComponents = async () => {
 
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
@@ -31,7 +30,6 @@ export const updateOnboardingStep = async (
 
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };

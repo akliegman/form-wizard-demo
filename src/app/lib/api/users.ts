@@ -6,7 +6,6 @@ export const fetchMe = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
@@ -17,7 +16,6 @@ export const fetchAllUsers = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
@@ -28,7 +26,6 @@ export const fetchLogout = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
@@ -44,7 +41,6 @@ export const createUser = async (
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
@@ -58,7 +54,6 @@ export const updateUser = async (body: Partial<User>) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };

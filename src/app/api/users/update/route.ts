@@ -28,26 +28,24 @@ export async function POST(request: NextRequest) {
 
   const birthdateDate = birthdate
     ? new Date(birthdate).toISOString()
-    : existingUserData.birthdate
+    : existingUserData?.birthdate
       ? new Date(existingUserData.birthdate).toISOString()
       : null;
 
-  console.log(
-    "existing birthdate",
-    existingUserData.birthdate,
-    new Date(existingUserData.birthdate).toISOString(),
-  );
+  console.log(birthdateDate, "birthdate");
 
   const user = {
     user_id,
-    about_me: about_me || existingUserData.about_me || "",
-    birthdate: birthdateDate || existingUserData.birthdate || null,
-    onboarding_step: onboarding_step || existingUserData.onboarding_step,
-    street_address: street_address || existingUserData.street_address || "",
-    city: city || existingUserData.city || "",
-    state: state || existingUserData.state || "",
-    zip: zip || existingUserData.zip || "",
+    about_me: about_me || existingUserData?.about_me || null,
+    birthdate: birthdateDate || existingUserData?.birthdate || null,
+    onboarding_step: onboarding_step || existingUserData?.onboarding_step || 1,
+    street_address: street_address || existingUserData?.street_address || null,
+    city: city || existingUserData?.city || null,
+    state: state || existingUserData?.state || null,
+    zip: zip || existingUserData?.zip || null,
   };
+
+  console.log("user", user);
 
   const updatedUser = await client.query(sqlUpdateUser(user as User));
 

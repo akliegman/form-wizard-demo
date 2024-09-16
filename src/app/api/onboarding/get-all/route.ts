@@ -12,7 +12,6 @@ export async function GET() {
 
     return NextResponse.json({ components }, { status: 200 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json({ error }, { status: 500 });
   } finally {
     await client.end();
